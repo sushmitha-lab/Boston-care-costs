@@ -1,0 +1,4 @@
+hospital_id,hospital_name,mrf_version,total_rows,pct_cash_price_present,pct_gross_present,pct_negotiated_dollar_present,pct_rows_with_cpt,distinct_services,distinct_payers
+bidmc,Beth Israel Deaconess Medical Center [SAMPLE],3.0.0,180,66.7,100.0,90.0,100.0,30,5
+bwh,Brigham and Women's Hospital [SAMPLE],3.0.0,180,100.0,100.0,100.0,100.0,30,5
+mgh,Massachusetts General Hospital [SAMPLE],3.0.0,180,100.0,100.0,100.0,100.0,30,5

@@ -1,0 +1,9 @@
+node_modules/
+dist/
+data/raw/
+data/hpt.duckdb
+__pycache__/
+dbt_packages/
+logs/
+target/
+.venv/

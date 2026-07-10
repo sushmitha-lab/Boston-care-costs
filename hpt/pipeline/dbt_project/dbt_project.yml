@@ -1,0 +1,13 @@
+name: boston_hpt
+version: "0.1.0"
+profile: boston_hpt
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+
+models:
+  boston_hpt:
+    staging:
+      +materialized: view
+    marts:
+      +materialized: table

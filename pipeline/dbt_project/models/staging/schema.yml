@@ -1,0 +1,28 @@
+version: 2
+models:
+  - name: stg_standard_charges
+    columns:
+      - name: hospital_id
+        tests: [not_null]
+      - name: description
+        tests: [not_null]
+  - name: dim_hospital
+    columns:
+      - name: hospital_id
+        tests: [unique, not_null]
+  - name: dim_service
+    columns:
+      - name: service_key
+        tests: [unique, not_null]
+  - name: fct_standard_charges
+    columns:
+      - name: hospital_id
+        tests:
+          - relationships:
+              to: ref('dim_hospital')
+              field: hospital_id
+      - name: gross_charge
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              config: {severity: warn}

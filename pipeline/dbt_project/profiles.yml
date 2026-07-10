@@ -1,0 +1,7 @@
+boston_hpt:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: ../../data/hpt.duckdb
+      threads: 4
