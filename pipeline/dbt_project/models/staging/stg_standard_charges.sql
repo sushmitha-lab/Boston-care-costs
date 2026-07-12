@@ -7,12 +7,12 @@ select
     description,
     setting,
     coalesce(
-        case when code_1_type in ('CPT','HCPCS','MS-DRG','DRG') then code_1 end,
-        case when code_2_type in ('CPT','HCPCS','MS-DRG','DRG') then code_2 end
+        case when code_1_type in ('CPT','HCPCS','MS-DRG','DRG','APR-DRG') then code_1 end,
+        case when code_2_type in ('CPT','HCPCS','MS-DRG','DRG','APR-DRG') then code_2 end
     )                                          as billing_code,
     coalesce(
-        case when code_1_type in ('CPT','HCPCS','MS-DRG','DRG') then code_1_type end,
-        case when code_2_type in ('CPT','HCPCS','MS-DRG','DRG') then code_2_type end
+        case when code_1_type in ('CPT','HCPCS','MS-DRG','DRG','APR-DRG') then code_1_type end,
+        case when code_2_type in ('CPT','HCPCS','MS-DRG','DRG','APR-DRG') then code_2_type end
     )                                          as billing_code_type,
     gross_charge,
     discounted_cash,

@@ -17,10 +17,13 @@ def dump(query: str, name: str):
     (OUT / f"{name}.json").write_text(json.dumps(rows, default=str))
     print(f"{name}: {len(rows)} rows")
 
-dump("select * from mart_cash_price_comparison", "comparison")
-dump("select * from mart_price_variation", "variation")
-dump("select * from mart_cash_vs_negotiated", "cash_vs_negotiated")
-dump("""select h.*, q.* exclude (hospital_id, hospital_name, mrf_version)
-        from dim_hospital h
-        join read_csv_auto('../../data/staging/quality_scorecard.csv') q
-        using (hospital_id)""", "hospitals")
+dump("""
+    select * from mart_cash_price_comparison
+    where billing_code_type in ('CPT','HCPCS','MS-DRG','DRG','APR-DRG')
+      and service_key in (
+          select service_key from mart_cash_price_comparison
+          where cash_price is not null
+          group by service_key
+          having count(distinct hospital_id) >= 2
+      )
+""", "comparison")

@@ -1,10 +1,3 @@
-# Hospital registry for the Boston Hospital Price Transparency pipeline.
-# Discovery order per hospital:
-#   1. If mrf_url is set, use it directly.
-#   2. Else fetch https://<domain>/cms-hpt.txt (mandated by CMS since July 2024)
-#      and read the mrf-url field.
-# Add hospitals by appending entries; the pipeline handles the rest.
-
 hospitals:
   - id: mgh
     name: Massachusetts General Hospital
@@ -12,7 +5,7 @@ hospitals:
     domain: massgeneral.org
     city: Boston
     state: MA
-    mrf_url: null   # discovered via cms-hpt.txt at runtime
+    mrf_url: null
 
   - id: bwh
     name: Brigham and Women's Hospital
@@ -28,4 +21,4 @@ hospitals:
     domain: bidmc.org
     city: Boston
     state: MA
-    mrf_url: null
+    mrf_url: "https://bidmc.org/042103881_beth-israel-deaconess-medical-center_standardcharges.json"

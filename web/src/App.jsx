@@ -8,9 +8,9 @@ const fmt = (v) =>
   v == null ? "—" : "$" + Number(v).toLocaleString("en-US", { maximumFractionDigits: 0 });
 
 const HOSPITAL_SHORT = {
-  "Massachusetts General Hospital [SAMPLE]": "Mass General",
-  "Brigham and Women's Hospital [SAMPLE]": "Brigham & Women's",
-  "Beth Israel Deaconess Medical Center [SAMPLE]": "Beth Israel",
+  "Massachusetts General Hospital": "Mass General",
+  "Brigham and Women's Hospital": "Brigham & Women's",
+  "Beth Israel Deaconess Medical Center": "Beth Israel",
 };
 const short = (n) => HOSPITAL_SHORT[n] || n;
 
@@ -83,7 +83,7 @@ function ServiceCard({ svc }) {
           <span className="spreadnote">{svc.spread.toFixed(1)}× price spread</span>
         )}
       </div>
-      {svc.priced.length > 1 && <SpreadStrip svc={svc} />}
+      {svc.priced.length > 1 && svc.max > svc.min && <SpreadStrip svc={svc} />}
       <div className="rows">
         {[...svc.hospitals]
           .sort((a, b) => (a.cash_price ?? 1e12) - (b.cash_price ?? 1e12))
@@ -281,12 +281,7 @@ function Methodology() {
         bill) are typically excluded from facility files. This site is an
         informational tool, not a quote.
       </p>
-      <h3>Current data</h3>
-      <p>
-        This deployment runs on structurally realistic <strong>sample data</strong>{" "}
-        generated from the official CMS v3.0.0 templates while hospital ingestion is
-        validated. Prices shown are synthetic and clearly marked.
-      </p>
+
     </section>
   );
 }

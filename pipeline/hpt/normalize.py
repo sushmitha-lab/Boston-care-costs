@@ -80,7 +80,8 @@ def quality_scorecard(df: pl.DataFrame) -> pl.DataFrame:
             .round(1)
             .alias("pct_negotiated_dollar_present"),
             (
-                ((pl.col("code_1_type") == "CPT") | (pl.col("code_2_type") == "CPT"))
+                (pl.col("code_1_type").is_in(["CPT", "HCPCS"])
+                 | pl.col("code_2_type").is_in(["CPT", "HCPCS"]))
                 .mean()
                 * 100
             )

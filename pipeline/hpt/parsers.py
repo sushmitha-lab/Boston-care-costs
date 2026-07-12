@@ -144,10 +144,15 @@ def parse_json_mrf(path: Path, hospital_id: str) -> Iterator[dict]:
     for item in items:
         desc = _clean(item.get("description"))
         codes = item.get("code_information") or []
-        code_1 = _clean(codes[0].get("code")) if len(codes) > 0 else None
-        code_1_type = _clean(codes[0].get("type")) if len(codes) > 0 else None
-        code_2 = _clean(codes[1].get("code")) if len(codes) > 1 else None
-        code_2_type = _clean(codes[1].get("type")) if len(codes) > 1 else None
+        _prio = {"CPT": 0, "HCPCS": 1, "MS-DRG": 2, "DRG": 3, "APR-DRG": 4}
+        ranked = sorted(
+            codes,
+            key=lambda c: _prio.get(str(c.get("type", "")).upper().strip(), 99),
+        )
+        code_1 = _clean(ranked[0].get("code")) if len(ranked) > 0 else None
+        code_1_type = _clean(ranked[0].get("type")) if len(ranked) > 0 else None
+        code_2 = _clean(ranked[1].get("code")) if len(ranked) > 1 else None
+        code_2_type = _clean(ranked[1].get("type")) if len(ranked) > 1 else None
 
         for sc in item.get("standard_charges") or []:
             base = {
