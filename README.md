@@ -4,7 +4,7 @@ Compare cash prices for common procedures across Boston hospitals, built from th
 machine-readable files (MRFs) every US hospital is federally required to publish
 under 45 CFR 180.
 
-**Live app:** [_add Vercel URL after deploy_](https://boston-care-costs.vercel.app/) · **Stack:** Python · Polars · DuckDB · dbt · GitHub Actions · React (Vite) · Vercel
+**Live app:** (https://boston-care-costs.vercel.app/) · **Stack:** Python · Polars · DuckDB · dbt · GitHub Actions · React (Vite) · Vercel
 
 ## Why this exists
 
